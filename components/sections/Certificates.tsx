@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Reveal } from "@/components/ui/Reveal";
 import { Lightbox } from "@/components/ui/Lightbox";
 import { portfolio } from "@/data/portfolio";
-import { Maximize2, ShieldCheck, Award, Calendar, CheckCircle2 } from "lucide-react";
+import { Maximize2, ShieldCheck, Award, Calendar, CheckCircle2, ArrowUpRight } from "lucide-react";
 
 export function Certificates() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -36,11 +36,11 @@ export function Certificates() {
               Certificates & Academic Programs
             </h2>
             <p className="text-sm md:text-base text-ink-muted mt-2 max-w-2xl">
-              Verified credentials from leading academic institutions and global essay competitions. Click any certificate to inspect full document details.
+              Verified certifications from leading global academic institutions and competitions. Click any credential to inspect the curated folio and full-resolution document.
             </p>
           </div>
-          <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gold/15 text-gold border border-gold/30 text-xs font-semibold tracking-wider uppercase shrink-0">
-            <CheckCircle2 className="w-3.5 h-3.5" />
+          <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gold/15 text-wine dark:text-gold border border-gold/40 text-xs font-bold tracking-wider uppercase shrink-0 shadow-sm">
+            <CheckCircle2 className="w-3.5 h-3.5 text-gold" />
             <span>4 Verified Honors</span>
           </div>
         </div>
@@ -52,12 +52,12 @@ export function Certificates() {
           <Reveal key={cert.id} delay={index * 0.1}>
             <div
               onClick={() => handleOpenLightbox(index)}
-              className="group relative flex flex-col rounded-3xl bg-card border border-border/80 shadow-editorial transition-all duration-500 hover:-translate-y-1.5 hover:shadow-editorial-lg hover:border-gold/70 cursor-pointer overflow-hidden"
+              className="group relative flex flex-col rounded-[26px] bg-card border border-border/80 shadow-editorial transition-all duration-500 hover:-translate-y-1.5 hover:shadow-editorial-lg hover:border-gold cursor-pointer overflow-hidden"
             >
-              {/* Top Archival Certificate Document Preview */}
-              <div className="relative w-full h-64 sm:h-72 bg-gradient-to-b from-card-subtle/70 to-card-subtle/30 overflow-hidden border-b border-border/60 flex items-center justify-center p-4">
-                {/* Arched Inner Hairline */}
-                <div className="pointer-events-none absolute inset-3 rounded-2xl border border-gold/20" />
+              {/* Top Archival Certificate Document Frame */}
+              <div className="relative w-full h-64 sm:h-72 bg-gradient-to-b from-card-subtle/80 via-card-subtle/40 to-card-subtle/80 overflow-hidden border-b border-border/70 flex items-center justify-center p-4">
+                {/* Archival Double Matting Frame */}
+                <div className="pointer-events-none absolute inset-3 rounded-2xl border border-gold/25" />
 
                 <Image
                   src={cert.image}
@@ -67,64 +67,68 @@ export function Certificates() {
                   className="object-contain p-4 transition-transform duration-700 ease-out group-hover:scale-105"
                 />
 
-                {/* Prominent Corner Award Seal (z-20 so it never gets obscured) */}
-                {cert.scoreOrAward && (
-                  <div className="absolute top-4 left-4 z-20">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-card/95 dark:bg-[#1A1614]/95 backdrop-blur-md border border-gold/60 text-xs font-bold text-wine dark:text-gold shadow-md">
-                      <Award className="w-3.5 h-3.5 text-gold shrink-0" />
-                      <span>{cert.scoreOrAward}</span>
-                    </span>
-                  </div>
-                )}
+                {/* Folio Index Badge (Top Right) */}
+                <div className="absolute top-4 right-4 z-20">
+                  <span className="px-2.5 py-1 rounded-md bg-black/60 backdrop-blur-md text-white text-[10px] font-mono tracking-widest uppercase border border-white/15">
+                    FOLIO № 0{index + 1}
+                  </span>
+                </div>
 
                 {/* Inspect Overlay Prompt */}
-                <div className="absolute inset-0 bg-black/45 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-10">
-                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/95 text-stone-900 text-xs font-bold tracking-wider uppercase shadow-xl transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-10">
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white text-stone-900 text-xs font-bold tracking-wider uppercase shadow-xl transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
                     <Maximize2 className="w-3.5 h-3.5 text-wine" />
-                    <span>Inspect Document</span>
+                    <span>Open Curated Folio</span>
                   </div>
                 </div>
               </div>
 
-              {/* Certificate Details */}
-              <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between space-y-4">
-                <div>
-                  <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-ink-muted mb-2 font-sans">
-                    <span className="flex items-center gap-1.5 font-semibold text-wine dark:text-gold">
-                      <ShieldCheck className="w-3.5 h-3.5" />
-                      {cert.issuer}
+              {/* Certificate Details Body */}
+              <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between space-y-5">
+                <div className="space-y-3">
+                  {/* Issuer & Date Row */}
+                  <div className="flex flex-wrap items-center justify-between gap-2 text-xs font-sans">
+                    <span className="flex items-center gap-1.5 font-bold text-wine dark:text-gold">
+                      <ShieldCheck className="w-4 h-4 text-gold shrink-0" />
+                      <span>{cert.issuer}</span>
                     </span>
-                    <span className="flex items-center gap-1">
-                      <Calendar className="w-3 h-3 text-gold" />
-                      {cert.date}
+                    <span className="flex items-center gap-1 text-ink-muted">
+                      <Calendar className="w-3.5 h-3.5 text-gold shrink-0" />
+                      <span>{cert.date}</span>
                     </span>
                   </div>
 
-                  {/* Primary Distinction Badge in Card Body */}
+                  {/* 🌟 Prominent Distinction Badge (Ultra-Bold Enamel Ribbon Design) */}
                   {cert.scoreOrAward && (
-                    <div className="my-2.5">
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gold/15 text-wine dark:text-gold border border-gold/40 text-xs font-bold tracking-wide shadow-sm">
-                        <Award className="w-3.5 h-3.5 text-gold shrink-0" />
-                        <span>{cert.scoreOrAward}</span>
-                      </span>
+                    <div className="pt-0.5">
+                      <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-wine via-[#8E2344] to-wine text-white border border-gold/70 shadow-[0_2px_10px_rgba(201,166,107,0.25)]">
+                        <Award className="w-3.5 h-3.5 text-gold-light shrink-0" />
+                        <span className="font-sans font-bold text-xs tracking-wide">
+                          {cert.scoreOrAward}
+                        </span>
+                      </div>
                     </div>
                   )}
 
+                  {/* Title */}
                   <h3 className="font-serif text-xl sm:text-2xl font-bold text-ink group-hover:text-wine dark:group-hover:text-gold transition-colors leading-snug">
                     {cert.title}
                   </h3>
 
-                  <p className="text-xs sm:text-sm text-ink-muted leading-relaxed mt-2.5">
+                  {/* Summary */}
+                  <p className="text-xs sm:text-sm text-ink-muted leading-relaxed line-clamp-3">
                     {cert.summary}
                   </p>
                 </div>
 
-                <div className="pt-4 border-t border-border/60 flex items-center justify-between text-xs">
-                  <span className="font-sans font-medium text-ink-muted">
+                {/* Bottom Folio Footer Action */}
+                <div className="pt-4 border-t border-border/70 flex items-center justify-between text-xs">
+                  <span className="font-sans font-medium text-ink-muted truncate max-w-[200px] sm:max-w-xs">
                     {cert.program}
                   </span>
-                  <span className="text-wine dark:text-gold font-bold flex items-center gap-1 group-hover:underline">
-                    View Full Credential &rarr;
+                  <span className="inline-flex items-center gap-1 font-bold text-wine dark:text-gold group-hover:underline shrink-0">
+                    <span>Inspect Folio</span>
+                    <ArrowUpRight className="w-3.5 h-3.5" />
                   </span>
                 </div>
               </div>
