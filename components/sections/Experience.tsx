@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+import Image from "next/image";
 import { Reveal } from "@/components/ui/Reveal";
 import { portfolio } from "@/data/portfolio";
 import {
@@ -13,9 +15,15 @@ import {
   Camera,
   Mountain,
   CheckCircle2,
+  FileCheck,
+  Maximize2,
+  X,
 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export function Experience() {
+  const [activeDoc, setActiveDoc] = useState<{ url: string; title: string } | null>(null);
+
   const getLeadershipIcon = (iconName: string) => {
     const props = { className: "w-5 h-5 text-wine dark:text-gold" };
     switch (iconName) {
@@ -151,19 +159,98 @@ export function Experience() {
                     <p className="text-xs text-ink-muted leading-relaxed mt-2.5">
                       {item.description}
                     </p>
+
+                    {/* Band Live Drumming Performance Photo */}
+                    {item.image && (
+                      <div
+                        onClick={() => setActiveDoc({ url: item.image!, title: `${item.title} - Live Performance` })}
+                        className="group/dimg relative w-full h-32 mt-3 rounded-xl overflow-hidden border border-gold/40 shadow-sm cursor-pointer"
+                      >
+                        <Image
+                          src={item.image}
+                          alt={item.title}
+                          fill
+                          className="object-cover object-center transition-transform duration-500 group-hover/dimg:scale-105"
+                          sizes="(max-width: 640px) 100vw, 300px"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex items-end p-2">
+                          <span className="text-[10px] font-bold text-white flex items-center gap-1">
+                            <Maximize2 className="w-2.5 h-2.5 text-gold" />
+                            <span>Live at Brewtiful Cafe</span>
+                          </span>
+                        </div>
+                      </div>
+                    )}
                   </div>
 
-                  {item.highlights && item.highlights.length > 0 && (
-                    <div className="mt-3 pt-3 border-t border-border/50 text-[11px] text-ink-muted/90 italic font-serif">
-                      &bull; {item.highlights[0]}
-                    </div>
-                  )}
+                  <div className="mt-3 pt-3 border-t border-border/50 space-y-2">
+                    {/* Official Letter of Recommendation Trigger */}
+                    {item.documentUrl && (
+                      <button
+                        onClick={() =>
+                          setActiveDoc({
+                            url: item.documentUrl!,
+                            title: item.documentLabel || `Official Letter of Recommendation (${item.organization})`,
+                          })
+                        }
+                        className="inline-flex items-center gap-1.5 text-[11px] font-bold text-wine dark:text-gold hover:underline"
+                      >
+                        <FileCheck className="w-3.5 h-3.5 text-gold" />
+                        <span>View Verified LOR Document &rarr;</span>
+                      </button>
+                    )}
+
+                    {item.highlights && item.highlights.length > 0 && (
+                      <div className="text-[11px] text-ink-muted/90 italic font-serif">
+                        &bull; {item.highlights[0]}
+                      </div>
+                    )}
+                  </div>
                 </div>
               </Reveal>
             ))}
           </div>
         </div>
       </div>
+
+      {/* Official Document / LOR Inspection Modal */}
+      <AnimatePresence>
+        {activeDoc && (
+          <div
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/85 backdrop-blur-md"
+            onClick={() => setActiveDoc(null)}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative max-w-2xl w-full max-h-[90vh] bg-card rounded-2xl overflow-hidden border border-gold/40 shadow-2xl flex flex-col"
+            >
+              <div className="p-4 border-b border-border flex items-center justify-between bg-card">
+                <span className="font-serif font-bold text-ink text-sm sm:text-base">
+                  {activeDoc.title}
+                </span>
+                <button
+                  onClick={() => setActiveDoc(null)}
+                  className="w-8 h-8 rounded-full border border-border flex items-center justify-center text-ink hover:text-wine"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+              <div className="relative w-full h-[65vh] max-h-[650px] p-2 bg-black/10">
+                <Image
+                  src={activeDoc.url}
+                  alt={activeDoc.title}
+                  fill
+                  className="object-contain p-2"
+                  sizes="(max-width: 768px) 100vw, 700px"
+                />
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

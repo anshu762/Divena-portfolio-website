@@ -10,6 +10,7 @@ export interface Project {
   tags: string[];
   liveUrl?: string;
   featured?: boolean;
+  image?: string;
 }
 
 export interface Certificate {
@@ -32,6 +33,7 @@ export interface Achievement {
   metric?: string;
   description: string;
   category: "Academics" | "Athletics" | "Entrepreneurship" | "Philanthropy" | "Marketing";
+  image?: string;
 }
 
 export interface ExperienceItem {
@@ -52,6 +54,9 @@ export interface LeadershipItem {
   description: string;
   iconName: string;
   highlights?: string[];
+  image?: string;
+  documentUrl?: string;
+  documentLabel?: string;
 }
 
 export interface PortfolioData {
@@ -62,7 +67,7 @@ export interface PortfolioData {
   education: string;
   bio: string;
   extendedBio: string;
-  profileImage: string; // Empty string triggers luxury SVG monogram. Drop 'profile.jpg' into public/images/ and set to '/images/profile.jpg' anytime.
+  profileImage: string; // Populated with real high-res portrait
   contact: {
     email: string;
     phone: string;
@@ -87,8 +92,9 @@ export interface PortfolioData {
     title: string;
     role: string;
     tenure: string;
-    accolades: { event: string; rank: string; year: string }[];
     narrative: string;
+    accolades: { event: string; rank: string; year: string }[];
+    images?: { url: string; label: string; year: string }[];
   };
   projects: Project[];
   certificates: Certificate[];
@@ -104,7 +110,7 @@ export const portfolio: PortfolioData = {
   role: "Aspiring Entrepreneur & Business Economics Scholar",
   school: "Chirec International School, Hyderabad",
   education: "12th Grade · Business Management & Economics",
-  profileImage: "", // Replace with "/images/profile.jpg" when photo is uploaded
+  profileImage: "/images/profile.jpg", // Divena's authentic high-resolution portrait
   bio: "I'm a Business Management and Economics student with a strong interest in behavioural economics and how people actually make decisions. I enjoy connecting theory to real-world business problems. My goal is to build and run my own business.",
   extendedBio: "Rooted in empirical economics and driven by entrepreneurial curiosity, I examine consumer friction, incentive structures, and behavioral nudges. Whether leading athletic squads as volleyball captain, launching initiatives for grassroots artisans, or analyzing venture capital theses, my approach combines analytical rigor with empathy-driven strategy.",
   contact: {
@@ -185,6 +191,18 @@ export const portfolio: PortfolioData = {
       { event: "ISSO National Games U-19", rank: "2nd Place · Silver Medalist", year: "2025" },
       { event: "Don Bosco Inter-School U-14 Tournament", rank: "1st Place · Gold Medalist", year: "Foundational" },
     ],
+    images: [
+      {
+        url: "/images/volleyball_1st.jpg",
+        label: "1st Place ISSO U-19 Champions Trophy",
+        year: "2026",
+      },
+      {
+        url: "/images/volleyball_2nd.png",
+        label: "2nd Place ISSO National Games Silver",
+        year: "2025",
+      },
+    ],
   },
   projects: [
     {
@@ -205,6 +223,7 @@ export const portfolio: PortfolioData = {
       tags: ["Social Enterprise", "Next.js / Netlify", "E-Commerce", "Women In Business"],
       liveUrl: "https://ruralbazaar.netlify.app/",
       featured: true,
+      image: "/images/rural_bazaar.png",
     },
     {
       id: "gramin-growth-lab",
@@ -397,6 +416,7 @@ export const portfolio: PortfolioData = {
       description:
         "Captained the varsity squad to first-place triumph against premier international high school teams across the country.",
       category: "Athletics",
+      image: "/images/volleyball_1st.jpg",
     },
     {
       id: "ach-volleyball-2",
@@ -407,6 +427,7 @@ export const portfolio: PortfolioData = {
       description:
         "Led team through grueling multi-day national tournament brackets, orchestrating tactical rotations and high-intensity defense.",
       category: "Athletics",
+      image: "/images/volleyball_2nd.png",
     },
     {
       id: "ach-charity-fundraiser",
@@ -427,6 +448,7 @@ export const portfolio: PortfolioData = {
       description:
         "Revamped editorial social identity, introduced high-retention reel formats, and spearheaded student engagement campaigns on Instagram (@theeruditenewspaper).",
       category: "Marketing",
+      image: "/images/erudite.jpg",
     },
     {
       id: "ach-reacycle-finalist",
@@ -534,6 +556,8 @@ export const portfolio: PortfolioData = {
         "Negotiated official equipment and apparel deals with Puma and Decathlon",
         "Secured high-visibility event sponsorships with Prime",
       ],
+      documentUrl: "/images/lor_varsity.png",
+      documentLabel: "Official Letter of Recommendation (Varsity Sports)",
     },
     {
       id: "lead-pawga",
@@ -547,6 +571,8 @@ export const portfolio: PortfolioData = {
         "Maintained high animal placement safety and screening standards",
         "Cultivated partnerships with regional rescue shelters",
       ],
+      documentUrl: "/images/lor_pawga.png",
+      documentLabel: "Official Letter of Recommendation (Pawga)",
     },
     {
       id: "lead-interact",
@@ -569,7 +595,8 @@ export const portfolio: PortfolioData = {
       description:
         "Rhythmic anchor and percussionist for student music group 'Eclipse', performing at inter-school festivals, assemblies, and live showcase nights.",
       iconName: "Music",
-      highlights: ["Extensive live stage performances and tempo orchestration"],
+      highlights: ["Extensive live stage performances and tempo orchestration at Brewtiful Cafe"],
+      image: "/images/drums_eclipse.jpg",
     },
     {
       id: "lead-photographer",

@@ -19,7 +19,7 @@ export function MonogramPlaceholder({
     return (
       <div
         className={cn(
-          "relative overflow-hidden rounded-t-[140px] rounded-b-[40px] border border-gold/40 shadow-editorial-lg bg-card-subtle group",
+          "relative overflow-hidden rounded-t-[140px] rounded-b-[40px] border-2 border-gold/50 shadow-editorial-lg bg-gradient-to-b from-[#2A141D] to-card-subtle group",
           className
         )}
       >
@@ -28,11 +28,16 @@ export function MonogramPlaceholder({
           alt={name}
           fill
           priority
-          sizes="(max-width: 768px) 280px, (max-width: 1200px) 380px, 440px"
-          className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+          sizes="(max-width: 640px) 260px, (max-width: 768px) 300px, (max-width: 1200px) 380px, 440px"
+          className="object-cover object-[center_12%] transition-transform duration-700 ease-out group-hover:scale-105"
         />
-        {/* Subtle gold hairline inner glow */}
-        <div className="pointer-events-none absolute inset-0 rounded-t-[140px] rounded-b-[40px] ring-1 ring-inset ring-gold/30" />
+
+        {/* Subtle gold hairline inner framing */}
+        <div className="pointer-events-none absolute inset-2.5 rounded-t-[128px] rounded-b-[30px] border border-gold/30" />
+        <div className="pointer-events-none absolute inset-0 rounded-t-[140px] rounded-b-[40px] ring-1 ring-inset ring-gold/40" />
+
+        {/* Subtle bottom vignette gradient for depth */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
       </div>
     );
   }

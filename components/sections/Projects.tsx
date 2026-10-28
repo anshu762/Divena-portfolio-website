@@ -1,10 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { Reveal } from "@/components/ui/Reveal";
 import { Modal } from "@/components/ui/Modal";
 import { portfolio, type Project } from "@/data/portfolio";
-import { ArrowUpRight, ExternalLink, Sparkles, Layers, CheckCircle2 } from "lucide-react";
+import { ArrowUpRight, ExternalLink, Sparkles, Layers, CheckCircle2, Globe } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function Projects() {
@@ -62,7 +63,7 @@ export function Projects() {
       </Reveal>
 
       {/* Bento Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 mt-12">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 mt-12 items-stretch">
         {filteredProjects.map((project, index) => {
           const isFeatured = project.featured;
           const colSpanClass = isFeatured
@@ -73,7 +74,7 @@ export function Projects() {
             <Reveal
               key={project.id}
               delay={index * 0.08}
-              className={colSpanClass}
+              className={cn("h-full", colSpanClass)}
             >
               <div
                 onClick={() => setSelectedProject(project)}
@@ -101,6 +102,31 @@ export function Projects() {
                   <p className="text-xs sm:text-sm font-medium text-wine dark:text-[#E8829C] mt-1 italic font-serif">
                     {project.tagline}
                   </p>
+
+                  {/* Real platform visual for Rural Bazaar */}
+                  {project.image && (
+                    <div className="relative w-full h-44 sm:h-52 my-4 rounded-2xl overflow-hidden border border-border/80 bg-black/5 dark:bg-black/30 group/img shadow-sm">
+                      {/* Browser Mockup Top Bar */}
+                      <div className="absolute top-0 inset-x-0 h-6 bg-card-subtle/95 border-b border-border/70 flex items-center px-3 gap-1.5 z-10">
+                        <div className="w-2 h-2 rounded-full bg-red-400/80" />
+                        <div className="w-2 h-2 rounded-full bg-yellow-400/80" />
+                        <div className="w-2 h-2 rounded-full bg-green-400/80" />
+                        <div className="ml-2 flex items-center gap-1 text-[9px] font-mono text-ink-muted">
+                          <Globe className="w-2.5 h-2.5 text-gold" />
+                          <span>ruralbazaar.netlify.app</span>
+                        </div>
+                      </div>
+                      <div className="relative w-full h-full pt-6">
+                        <Image
+                          src={project.image}
+                          alt={project.title}
+                          fill
+                          className="object-cover object-top transition-transform duration-700 ease-out group-hover/img:scale-105"
+                          sizes="(max-width: 768px) 100vw, 50vw"
+                        />
+                      </div>
+                    </div>
+                  )}
 
                   <p className="text-xs sm:text-sm text-ink-muted leading-relaxed mt-3 line-clamp-3">
                     {project.description}
@@ -191,6 +217,19 @@ export function Projects() {
       >
         {selectedProject && (
           <div className="space-y-6">
+            {/* If project has a high-res platform visual, render it */}
+            {selectedProject.image && (
+              <div className="relative w-full h-52 sm:h-64 rounded-2xl overflow-hidden border border-border/80 shadow-md">
+                <Image
+                  src={selectedProject.image}
+                  alt={selectedProject.title}
+                  fill
+                  className="object-cover object-top"
+                  sizes="(max-width: 768px) 100vw, 800px"
+                />
+              </div>
+            )}
+
             <div>
               <span className="text-xs uppercase tracking-wider text-gold font-sans font-semibold">
                 Role & Accountability: {selectedProject.role}
