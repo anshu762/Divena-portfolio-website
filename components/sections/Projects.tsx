@@ -5,7 +5,15 @@ import Image from "next/image";
 import { Reveal } from "@/components/ui/Reveal";
 import { Modal } from "@/components/ui/Modal";
 import { portfolio, type Project } from "@/data/portfolio";
-import { ArrowUpRight, ExternalLink, Sparkles, Layers, CheckCircle2, Globe } from "lucide-react";
+import {
+  ArrowUpRight,
+  ExternalLink,
+  Sparkles,
+  Layers,
+  CheckCircle2,
+  Globe,
+  Award,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function Projects() {
@@ -17,6 +25,27 @@ export function Projects() {
   const filteredProjects = activeFilter === "All"
     ? portfolio.projects
     : portfolio.projects.filter((p) => p.category === activeFilter);
+
+  // Dynamic grid span calculation ensuring mathematical balance across all rows
+  const getColSpanClass = (project: Project, totalCount: number) => {
+    if (activeFilter !== "All") {
+      if (totalCount === 1) return "lg:col-span-12";
+      if (totalCount === 2) return "lg:col-span-6 md:col-span-1";
+      return "lg:col-span-4 md:col-span-1";
+    }
+
+    // Default "All" view with intentional editorial hierarchy:
+    // 1. Rural Bazaar: Full-width Hero Banner (12 cols)
+    if (project.id === "rural-bazaar") return "lg:col-span-12";
+    // 2. Gramin Growth Lab & Reacycle: Prominent Venture Pair (6 cols each)
+    if (project.id === "gramin-growth-lab" || project.id === "reacycle") return "lg:col-span-6 md:col-span-1";
+    // 3. Theoria, SkillKeep, Wealth Management: Trio Row (4 cols each)
+    if (project.id === "theoria-research" || project.id === "skillkeep" || project.id === "wealth-management-plan") return "lg:col-span-4 md:col-span-1";
+    // 4. John Locke & Crimson Essays: Twin Essay Pair (6 cols each)
+    if (project.id === "cashless-society-essay" || project.id === "crimson-narrative-essay") return "lg:col-span-6 md:col-span-1";
+
+    return "lg:col-span-4 md:col-span-1";
+  };
 
   return (
     <section id="projects" className="py-24 px-4 md:px-8 max-w-7xl mx-auto">
@@ -38,7 +67,7 @@ export function Projects() {
               Selected Works & Case Studies
             </h2>
             <p className="text-sm md:text-base text-ink-muted mt-2 max-w-2xl">
-              From building live e-commerce infrastructure for grassroots craftswomen to commended global economic essays.
+              From building live e-commerce infrastructure for grassroots craftswomen to commended global economic theses.
             </p>
           </div>
 
@@ -65,11 +94,139 @@ export function Projects() {
       {/* Bento Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 mt-12 items-stretch">
         {filteredProjects.map((project, index) => {
-          const isFeatured = project.featured;
-          const colSpanClass = isFeatured
-            ? "lg:col-span-6 md:col-span-2"
-            : "lg:col-span-4 md:col-span-1";
+          const isRuralBazaar = project.id === "rural-bazaar" && (activeFilter === "All" || activeFilter === "Venture");
+          const colSpanClass = getColSpanClass(project, filteredProjects.length);
 
+          // Full-width Hero Banner for Rural Bazaar
+          if (isRuralBazaar) {
+            return (
+              <Reveal
+                key={project.id}
+                delay={index * 0.08}
+                className={cn("h-full", colSpanClass)}
+              >
+                <div
+                  onClick={() => setSelectedProject(project)}
+                  className="group relative h-full rounded-3xl bg-card border-2 border-gold/40 shadow-editorial-lg transition-all duration-500 hover:border-gold hover:shadow-2xl cursor-pointer overflow-hidden p-6 sm:p-8 md:p-10"
+                >
+                  {/* Subtle Background Aurora */}
+                  <div className="pointer-events-none absolute -right-20 -top-20 w-80 h-80 rounded-full bg-gold/10 dark:bg-gold/5 blur-3xl transition-opacity duration-500 opacity-60 group-hover:opacity-100" />
+                  <div className="pointer-events-none absolute -left-20 -bottom-20 w-80 h-80 rounded-full bg-wine/5 blur-3xl" />
+
+                  {/* Desktop 2-Column Split / Mobile Stack */}
+                  <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    {/* Left Details (5 cols) */}
+                    <div className="lg:col-span-5 flex flex-col justify-between space-y-5">
+                      <div>
+                        <div className="flex flex-wrap items-center gap-2.5 mb-3">
+                          <span className="px-3.5 py-1 rounded-full text-xs font-sans font-bold uppercase tracking-wider bg-gold/20 text-wine dark:text-gold border border-gold/50 shadow-sm flex items-center gap-1.5">
+                            <Sparkles className="w-3.5 h-3.5 text-gold shrink-0" />
+                            <span>Flagship Venture</span>
+                          </span>
+
+                          <span className="text-xs font-sans font-bold text-ink-muted tracking-wider uppercase">
+                            {project.role}
+                          </span>
+                        </div>
+
+                        <h3 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-ink tracking-tight group-hover:text-wine dark:group-hover:text-gold transition-colors leading-[1.05]">
+                          {project.title}
+                        </h3>
+
+                        <p className="text-sm sm:text-base font-serif italic text-wine dark:text-[#E8829C] mt-2">
+                          &ldquo;{project.tagline}&rdquo;
+                        </p>
+
+                        <p className="text-xs sm:text-sm text-ink-muted leading-relaxed mt-4">
+                          {project.description}
+                        </p>
+
+                        {/* Impact Highlights */}
+                        <ul className="mt-4 space-y-2 border-t border-border/60 pt-4">
+                          {project.impactMetrics?.slice(0, 2).map((metric, i) => (
+                            <li key={i} className="flex items-start gap-2 text-xs text-ink-muted">
+                              <CheckCircle2 className="w-3.5 h-3.5 text-wine dark:text-gold shrink-0 mt-0.5" />
+                              <span>{metric}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* Bottom Tags & Actions */}
+                      <div className="pt-2 space-y-4">
+                        <div className="flex flex-wrap gap-1.5">
+                          {project.tags.map((tag) => (
+                            <span
+                              key={tag}
+                              className="text-[10px] sm:text-xs px-2.5 py-1 rounded-md bg-card-subtle text-ink-muted border border-border/70"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+
+                        <div className="flex flex-wrap items-center gap-3 pt-1">
+                          {project.liveUrl && (
+                            <a
+                              href={project.liveUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={(e) => e.stopPropagation()}
+                              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-wine text-white text-xs font-bold uppercase tracking-wider hover:bg-wine-hover shadow-wine transition-all hover:scale-105"
+                              aria-label={`Visit live platform for ${project.title}`}
+                            >
+                              <span>Visit Live Platform</span>
+                              <ExternalLink className="w-3.5 h-3.5" />
+                            </a>
+                          )}
+
+                          <button
+                            type="button"
+                            className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full border border-border bg-card text-xs font-semibold text-ink hover:text-wine hover:border-wine transition-colors"
+                          >
+                            <span>Explore Case Study</span>
+                            <ArrowUpRight className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Right Column: Expansive 3K Browser Mockup (7 cols) */}
+                    <div className="lg:col-span-7">
+                      <div className="relative w-full rounded-2xl overflow-hidden border border-gold/40 bg-[#14110F] shadow-2xl group/mockup">
+                        {/* Browser Bar */}
+                        <div className="h-8 bg-[#1F1B18] border-b border-white/10 flex items-center px-3.5 gap-2 select-none">
+                          <div className="flex items-center gap-1.5">
+                            <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F56]" />
+                            <div className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" />
+                            <div className="w-2.5 h-2.5 rounded-full bg-[#27C93F]" />
+                          </div>
+                          <div className="flex-1 max-w-sm mx-auto bg-black/40 rounded-md px-3 py-0.5 flex items-center justify-center gap-1.5 text-[11px] font-mono text-stone-300">
+                            <Globe className="w-3 h-3 text-gold" />
+                            <span className="truncate">ruralbazaar.netlify.app</span>
+                          </div>
+                        </div>
+
+                        {/* High-res Image Preview */}
+                        <div className="relative w-full h-[240px] sm:h-[320px] md:h-[380px] bg-black/20">
+                          <Image
+                            src={project.image!}
+                            alt={project.title}
+                            fill
+                            priority
+                            className="object-cover object-top transition-transform duration-700 ease-out group-hover/mockup:scale-105"
+                            sizes="(max-width: 1024px) 100vw, 800px"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Reveal>
+            );
+          }
+
+          // Standard Bento Cards (Gramin Growth Lab, Reacycle, Theoria, SkillKeep, Wealth Management, Essays)
           return (
             <Reveal
               key={project.id}
@@ -90,12 +247,12 @@ export function Projects() {
                       {project.category}
                     </span>
 
-                    <span className="text-[11px] font-sans text-ink-muted tracking-wider uppercase">
+                    <span className="text-[11px] font-sans text-ink-muted tracking-wider uppercase font-medium">
                       {project.role}
                     </span>
                   </div>
 
-                  <h3 className="font-serif text-xl sm:text-2xl font-bold text-ink tracking-tight group-hover:text-wine dark:group-hover:text-gold transition-colors">
+                  <h3 className="font-serif text-xl sm:text-2xl font-bold text-ink tracking-tight group-hover:text-wine dark:group-hover:text-gold transition-colors leading-snug">
                     {project.title}
                   </h3>
 
@@ -103,38 +260,23 @@ export function Projects() {
                     {project.tagline}
                   </p>
 
-                  {/* Real platform visual for Rural Bazaar */}
-                  {project.image && (
-                    <div className="relative w-full h-44 sm:h-52 my-4 rounded-2xl overflow-hidden border border-border/80 bg-black/5 dark:bg-black/30 group/img shadow-sm">
-                      {/* Browser Mockup Top Bar */}
-                      <div className="absolute top-0 inset-x-0 h-6 bg-card-subtle/95 border-b border-border/70 flex items-center px-3 gap-1.5 z-10">
-                        <div className="w-2 h-2 rounded-full bg-red-400/80" />
-                        <div className="w-2 h-2 rounded-full bg-yellow-400/80" />
-                        <div className="w-2 h-2 rounded-full bg-green-400/80" />
-                        <div className="ml-2 flex items-center gap-1 text-[9px] font-mono text-ink-muted">
-                          <Globe className="w-2.5 h-2.5 text-gold" />
-                          <span>ruralbazaar.netlify.app</span>
-                        </div>
-                      </div>
-                      <div className="relative w-full h-full pt-6">
-                        <Image
-                          src={project.image}
-                          alt={project.title}
-                          fill
-                          className="object-cover object-top transition-transform duration-700 ease-out group-hover/img:scale-105"
-                          sizes="(max-width: 768px) 100vw, 50vw"
-                        />
-                      </div>
-                    </div>
-                  )}
-
                   <p className="text-xs sm:text-sm text-ink-muted leading-relaxed mt-3 line-clamp-3">
                     {project.description}
                   </p>
+
+                  {/* Highlights if present */}
+                  {project.impactMetrics && project.impactMetrics.length > 0 && (
+                    <div className="mt-4 pt-3 border-t border-border/60">
+                      <p className="text-[11px] font-sans text-ink-muted/90 flex items-center gap-1.5">
+                        <Award className="w-3.5 h-3.5 text-gold shrink-0" />
+                        <span className="line-clamp-1">{project.impactMetrics[0]}</span>
+                      </p>
+                    </div>
+                  )}
                 </div>
 
                 {/* Card Bottom Meta & Actions */}
-                <div className="mt-8 pt-4 border-t border-border/60 flex flex-wrap items-center justify-between gap-3">
+                <div className="mt-6 pt-4 border-t border-border/60 flex flex-wrap items-center justify-between gap-3">
                   <div className="flex flex-wrap gap-1.5">
                     {project.tags.slice(0, 2).map((tag) => (
                       <span
@@ -146,25 +288,8 @@ export function Projects() {
                     ))}
                   </div>
 
-                  <div className="flex items-center gap-2">
-                    {/* Live Link Button right on the card face */}
-                    {project.liveUrl && (
-                      <a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-wine text-white text-xs font-semibold hover:bg-wine-hover shadow-wine transition-colors"
-                        aria-label={`Visit live site for ${project.title}`}
-                      >
-                        <span>Visit Live Site</span>
-                        <ExternalLink className="w-3.5 h-3.5" />
-                      </a>
-                    )}
-
-                    <div className="w-8 h-8 rounded-full border border-border flex items-center justify-center text-ink-muted group-hover:text-white group-hover:bg-wine group-hover:border-wine transition-all duration-300">
-                      <ArrowUpRight className="w-4 h-4" />
-                    </div>
+                  <div className="w-8 h-8 rounded-full border border-border flex items-center justify-center text-ink-muted group-hover:text-white group-hover:bg-wine group-hover:border-wine transition-all duration-300">
+                    <ArrowUpRight className="w-4 h-4" />
                   </div>
                 </div>
               </div>

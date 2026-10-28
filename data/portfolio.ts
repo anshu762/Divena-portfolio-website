@@ -244,6 +244,23 @@ export const portfolio: PortfolioData = {
       featured: true,
     },
     {
+      id: "reacycle",
+      title: "Reacycle",
+      role: "Finalist & Web / Financial Architect",
+      category: "Venture",
+      tagline: "Young Entrepreneur Challenge Finalist (Top 6 of 20 teams) circular venture.",
+      description:
+        "A circular economy venture transforming municipal recyclables into commercial utility goods, backed by full unit-economics modeling and interactive portal.",
+      extendedDescription:
+        "Competed against 20 top youth enterprises to reach the final 6. Led the financial planning, developing projected balance sheets, cost of goods sold (COGS) breakdowns, and capital expenditure timelines, alongside building the responsive web interface for customer scheduling.",
+      impactMetrics: [
+        "Top 6 Finalist ranking out of 20 competitive venture pitches",
+        "Built end-to-end financial viability model and web platform",
+      ],
+      tags: ["Circular Economy", "Financial Modeling", "Competition Finalist", "Sustainability"],
+      featured: true,
+    },
+    {
       id: "theoria-research",
       title: "Research Paper: Theoria",
       role: "Independent Student Researcher",
@@ -276,23 +293,6 @@ export const portfolio: PortfolioData = {
       ],
       tags: ["SaaS Concept", "Blue Ocean Strategy", "Corporate EdTech", "HR Tech"],
       featured: false,
-    },
-    {
-      id: "reacycle",
-      title: "Reacycle",
-      role: "Finalist & Web / Financial Architect",
-      category: "Venture",
-      tagline: "Young Entrepreneur Challenge Finalist (Top 6 of 20 teams) circular venture.",
-      description:
-        "A circular economy venture transforming municipal recyclables into commercial utility goods, backed by full unit-economics modeling and interactive portal.",
-      extendedDescription:
-        "Competed against 20 top youth enterprises to reach the final 6. Led the financial planning, developing projected balance sheets, cost of goods sold (COGS) breakdowns, and capital expenditure timelines, alongside building the responsive web interface for customer scheduling.",
-      impactMetrics: [
-        "Top 6 Finalist ranking out of 20 competitive venture pitches",
-        "Built end-to-end financial viability model and web platform",
-      ],
-      tags: ["Circular Economy", "Financial Modeling", "Competition Finalist", "Sustainability"],
-      featured: true,
     },
     {
       id: "wealth-management-plan",
