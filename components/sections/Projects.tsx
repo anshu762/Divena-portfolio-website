@@ -20,7 +20,7 @@ export function Projects() {
   const [activeFilter, setActiveFilter] = useState<string>("All");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
-  const categories = ["All", "Venture", "Social Impact", "Research", "Essay", "Business Plan", "Business Model"];
+  const categories = ["All", "Venture", "Social Impact", "Research", "Essay", "Business Model"];
 
   const filteredProjects = activeFilter === "All"
     ? portfolio.projects
@@ -28,8 +28,13 @@ export function Projects() {
 
   // Dynamic grid span calculation ensuring mathematical balance across all rows
   const getColSpanClass = (project: Project, totalCount: number) => {
+    // Flagship Rural Bazaar always commands a full-width hero row so its 3K mockup is never squished
+    if (project.id === "rural-bazaar") return "lg:col-span-12";
+
     if (activeFilter !== "All") {
-      if (totalCount === 1) return "lg:col-span-12";
+      // In filtered views: if single item or under Venture filter (where Rural Bazaar already took Row 1),
+      // give the card full width so there is zero awkward blank space on the right.
+      if (totalCount === 1 || activeFilter === "Venture") return "lg:col-span-12";
       if (totalCount === 2) return "lg:col-span-6 md:col-span-1";
       return "lg:col-span-4 md:col-span-1";
     }
@@ -37,11 +42,11 @@ export function Projects() {
     // Default "All" view with intentional editorial hierarchy:
     // 1. Rural Bazaar: Full-width Hero Banner (12 cols)
     if (project.id === "rural-bazaar") return "lg:col-span-12";
-    // 2. Gramin Growth Lab & Reacycle: Prominent Venture Pair (6 cols each)
+    // 2. Gramin Growth Lab & Reacycle: Prominent Venture Pair (6 cols each = 12)
     if (project.id === "gramin-growth-lab" || project.id === "reacycle") return "lg:col-span-6 md:col-span-1";
-    // 3. Theoria, SkillKeep, Wealth Management: Trio Row (4 cols each)
+    // 3. Theoria, SkillKeep, Wealth Management: Trio Row (4 cols each = 12)
     if (project.id === "theoria-research" || project.id === "skillkeep" || project.id === "wealth-management-plan") return "lg:col-span-4 md:col-span-1";
-    // 4. Collaborative Science, John Locke Essay, & Harvard Crimson Essay: Academic Inquiries Trio (4 cols each)
+    // 4. Collaborative Science, John Locke Essay, & Harvard Crimson Essay: Academic Inquiries Trio (4 cols each = 12)
     if (
       project.id === "collaborative-science-project" ||
       project.id === "cashless-society-essay" ||
@@ -222,6 +227,92 @@ export function Projects() {
                             className="object-cover object-top transition-transform duration-700 ease-out group-hover/mockup:scale-105"
                             sizes="(max-width: 1024px) 100vw, 800px"
                           />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Reveal>
+            );
+          }
+
+          const isFullWidthCard = colSpanClass.includes("lg:col-span-12");
+
+          // Wide Executive Spread for Single or Full-Width Filtered Cards (e.g., Reacycle, Gramin Growth Lab)
+          if (isFullWidthCard) {
+            return (
+              <Reveal
+                key={project.id}
+                delay={index * 0.08}
+                className={cn("h-full", colSpanClass)}
+              >
+                <div
+                  onClick={() => setSelectedProject(project)}
+                  className="group relative h-full rounded-3xl bg-card border border-border/80 shadow-editorial transition-all duration-500 hover:-translate-y-1.5 hover:shadow-editorial-lg hover:border-gold/70 cursor-pointer overflow-hidden p-6 sm:p-8 md:p-10"
+                >
+                  <div className="pointer-events-none absolute -right-20 -bottom-20 w-80 h-80 rounded-full bg-wine/5 dark:bg-gold/5 blur-3xl transition-opacity duration-500 opacity-60 group-hover:opacity-100" />
+                  
+                  <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    {/* Left Details (7 cols) */}
+                    <div className="lg:col-span-7 flex flex-col justify-between space-y-4">
+                      <div>
+                        <div className="flex items-center gap-2.5 mb-3">
+                          <span className="px-3.5 py-1 rounded-full text-xs font-sans font-bold uppercase tracking-wider bg-gold/15 text-gold border border-gold/30">
+                            {project.category}
+                          </span>
+                          <span className="text-xs font-sans font-bold text-ink-muted tracking-wider uppercase">
+                            {project.role}
+                          </span>
+                        </div>
+
+                        <h3 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-ink tracking-tight group-hover:text-wine dark:group-hover:text-gold transition-colors leading-snug">
+                          {project.title}
+                        </h3>
+
+                        <p className="text-sm font-medium text-wine dark:text-[#E8829C] mt-1.5 italic font-serif">
+                          &ldquo;{project.tagline}&rdquo;
+                        </p>
+
+                        <p className="text-xs sm:text-sm text-ink-muted leading-relaxed mt-3">
+                          {project.description}
+                        </p>
+                      </div>
+
+                      <div className="flex flex-wrap gap-1.5 pt-2">
+                        {project.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="text-[11px] px-3 py-1 rounded-lg bg-card-subtle text-ink-muted border border-border/60"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Right Metrics & Highlights (5 cols) */}
+                    <div className="lg:col-span-5 p-6 rounded-2xl bg-card-subtle/80 border border-border/80 flex flex-col justify-between space-y-5">
+                      <div>
+                        <span className="text-[11px] font-sans font-bold uppercase tracking-wider text-wine dark:text-gold flex items-center gap-1.5 mb-3">
+                          <Sparkles className="w-3.5 h-3.5 text-gold" />
+                          <span>Executive Impact & Milestones</span>
+                        </span>
+                        <ul className="space-y-2.5">
+                          {project.impactMetrics?.map((metric, i) => (
+                            <li key={i} className="flex items-start gap-2 text-xs text-ink-muted">
+                              <CheckCircle2 className="w-3.5 h-3.5 text-wine dark:text-gold shrink-0 mt-0.5" />
+                              <span>{metric}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <div className="pt-3 border-t border-border/60 flex items-center justify-between">
+                        <span className="text-xs font-serif font-bold text-ink">
+                          Inspect Detailed Dossier
+                        </span>
+                        <div className="w-8 h-8 rounded-full border border-border flex items-center justify-center text-ink-muted group-hover:text-white group-hover:bg-wine group-hover:border-wine transition-all duration-300">
+                          <ArrowUpRight className="w-4 h-4" />
                         </div>
                       </div>
                     </div>

@@ -171,6 +171,7 @@ export const portfolio: PortfolioData = {
     hard: [
       { name: "Market Analysis", focus: "TAM/SAM estimation, competitive landscape mapping" },
       { name: "Business Strategy", focus: "Value proposition design & unit economics" },
+      { name: "Financial Modeling", focus: "DCF frameworks, pricing elasticity & cash flow forecasting" },
       { name: "Accounting", focus: "Balance sheets, cash flow modeling & financial health" },
       { name: "Statistics", focus: "Empirical data interpretation & hypothesis testing" },
     ],

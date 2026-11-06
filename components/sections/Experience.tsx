@@ -138,6 +138,42 @@ export function Experience() {
                 </div>
               </Reveal>
             ))}
+
+            {/* Executive Immersion Synthesis Banner to eliminate empty vertical space */}
+            <Reveal delay={0.35}>
+              <div className="p-6 sm:p-7 rounded-3xl bg-gradient-to-br from-card via-card to-card-subtle border border-gold/40 shadow-editorial flex flex-col justify-between space-y-4">
+                <div className="flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-2">
+                    <Sparkles className="w-4 h-4 text-gold shrink-0" />
+                    <h4 className="font-serif font-bold text-base text-ink">
+                      Advisory & Corporate Immersion Synthesis
+                    </h4>
+                  </div>
+                  <span className="text-[10px] uppercase tracking-wider font-semibold px-2 py-0.5 rounded bg-gold/15 text-gold border border-gold/30">
+                    Cross-Sector
+                  </span>
+                </div>
+
+                <p className="text-xs text-ink-muted leading-relaxed">
+                  Synthesizing early-stage venture capital diligence at Sathguru, commercial financial feasibility at AND Consulting, enterprise supply-chain telemetry at Cache, and precision client staging at One Wedding.
+                </p>
+
+                <div className="grid grid-cols-3 gap-3 pt-3 border-t border-border/60 text-center">
+                  <div className="p-2.5 rounded-xl bg-card-subtle/70 border border-border/50">
+                    <span className="font-serif font-bold text-base text-wine dark:text-gold">4</span>
+                    <p className="text-[10px] text-ink-muted uppercase font-sans mt-0.5 font-medium">Sectors</p>
+                  </div>
+                  <div className="p-2.5 rounded-xl bg-card-subtle/70 border border-border/50">
+                    <span className="font-serif font-bold text-base text-wine dark:text-gold">100%</span>
+                    <p className="text-[10px] text-ink-muted uppercase font-sans mt-0.5 font-medium">Verified</p>
+                  </div>
+                  <div className="p-2.5 rounded-xl bg-card-subtle/70 border border-border/50">
+                    <span className="font-serif font-bold text-base text-wine dark:text-gold">Corporate</span>
+                    <p className="text-[10px] text-ink-muted uppercase font-sans mt-0.5 font-medium">Advisory</p>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
           </div>
         </div>
 
