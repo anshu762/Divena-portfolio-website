@@ -217,37 +217,62 @@ export function Achievements() {
       <AnimatePresence>
         {previewImage && (
           <div
-            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
-            onClick={() => setPreviewImage(null)}
+            className="fixed inset-0 z-[100] overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+            role="dialog"
+            aria-modal="true"
           >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              onClick={(e) => e.stopPropagation()}
-              className="relative max-w-3xl w-full max-h-[85vh] bg-card rounded-2xl overflow-hidden border border-gold/40 shadow-2xl flex flex-col"
-            >
-              <div className="p-4 border-b border-border flex items-center justify-between bg-card">
-                <span className="font-serif font-bold text-ink text-sm sm:text-base">
-                  {previewImage.title}
-                </span>
-                <button
-                  onClick={() => setPreviewImage(null)}
-                  className="w-8 h-8 rounded-full border border-border flex items-center justify-center text-ink hover:text-wine"
-                >
-                  <X className="w-4 h-4" />
-                </button>
-              </div>
-              <div className="relative w-full h-[60vh] max-h-[600px] p-2 bg-black/10">
-                <Image
-                  src={previewImage.url}
-                  alt={previewImage.title}
-                  fill
-                  className="object-contain"
-                  sizes="(max-width: 768px) 100vw, 800px"
-                />
-              </div>
-            </motion.div>
+            <div
+              className="fixed inset-0 bg-black/85 backdrop-blur-md"
+              onClick={() => setPreviewImage(null)}
+            />
+            <div className="min-h-full flex items-center justify-center p-3 sm:p-5 py-6 pointer-events-none">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                onClick={(e) => e.stopPropagation()}
+                className="pointer-events-auto relative max-w-3xl w-full max-h-[90vh] bg-card rounded-2xl overflow-hidden border border-gold/40 shadow-2xl flex flex-col my-auto"
+              >
+                <div className="p-4 border-b border-border flex items-center justify-between bg-card shrink-0">
+                  <span className="font-serif font-bold text-ink text-sm sm:text-base">
+                    {previewImage.title}
+                  </span>
+                  <button
+                    onClick={() => setPreviewImage(null)}
+                    aria-label="Close dialog"
+                    className="w-8 h-8 rounded-full border border-border flex items-center justify-center text-ink hover:text-wine"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+                <div className="relative w-full h-[55vh] sm:h-[65vh] max-h-[600px] p-2 bg-black/10 flex-1">
+                  <Image
+                    src={previewImage.url}
+                    alt={previewImage.title}
+                    fill
+                    className="object-contain"
+                    sizes="(max-width: 768px) 100vw, 800px"
+                  />
+                </div>
+                <div className="p-3.5 border-t border-border/80 bg-card/95 backdrop-blur-md flex items-center justify-between gap-3 shrink-0">
+                  <a
+                    href={previewImage.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-wine text-white text-xs font-bold uppercase tracking-wider hover:bg-wine-hover shadow-wine transition-colors"
+                  >
+                    <span>Inspect High-Res</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                  <button
+                    onClick={() => setPreviewImage(null)}
+                    className="px-4 py-2 rounded-xl border border-border text-xs uppercase tracking-wider font-semibold text-ink hover:bg-card-subtle transition-colors"
+                  >
+                    Close
+                  </button>
+                </div>
+              </motion.div>
+            </div>
           </div>
         )}
       </AnimatePresence>
