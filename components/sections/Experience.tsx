@@ -117,6 +117,24 @@ export function Experience() {
                       </li>
                     ))}
                   </ul>
+
+                  {/* Verified Completion Certificate Trigger */}
+                  {exp.documentUrl && (
+                    <div className="mt-4 pt-3 border-t border-border/50">
+                      <button
+                        onClick={() =>
+                          setActiveDoc({
+                            url: exp.documentUrl!,
+                            title: exp.documentLabel || `Verified Completion Document (${exp.organization})`,
+                          })
+                        }
+                        className="inline-flex items-center gap-1.5 text-[11px] font-bold text-wine dark:text-gold hover:underline"
+                      >
+                        <FileCheck className="w-3.5 h-3.5 text-gold shrink-0" />
+                        <span>View Verified Completion Certificate &rarr;</span>
+                      </button>
+                    </div>
+                  )}
                 </div>
               </Reveal>
             ))}
@@ -160,10 +178,18 @@ export function Experience() {
                       {item.description}
                     </p>
 
-                    {/* Band Live Drumming Performance Photo */}
+                    {/* Band Live Drumming or Himalayan Expedition Photo */}
                     {item.image && (
                       <div
-                        onClick={() => setActiveDoc({ url: item.image!, title: `${item.title} - Live Performance` })}
+                        onClick={() =>
+                          setActiveDoc({
+                            url: item.image!,
+                            title:
+                              item.id === "lead-kedarkantha"
+                                ? "Kedarkantha Himalayan Expedition (12,500 ft) - Expedition Archive"
+                                : `${item.title} - Visual Proof`,
+                          })
+                        }
                         className="group/dimg relative w-full h-32 mt-3 rounded-xl overflow-hidden border border-gold/40 shadow-sm cursor-pointer"
                       >
                         <Image
@@ -176,7 +202,13 @@ export function Experience() {
                         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex items-end p-2">
                           <span className="text-[10px] font-bold text-white flex items-center gap-1">
                             <Maximize2 className="w-2.5 h-2.5 text-gold" />
-                            <span>Live at Brewtiful Cafe</span>
+                            <span>
+                              {item.id === "lead-band-drummer"
+                                ? "Live at Brewtiful Cafe"
+                                : item.id === "lead-kedarkantha"
+                                ? "12,500 ft Summit & Basecamp"
+                                : "View Visual Archive"}
+                            </span>
                           </span>
                         </div>
                       </div>
@@ -184,19 +216,25 @@ export function Experience() {
                   </div>
 
                   <div className="mt-3 pt-3 border-t border-border/50 space-y-2">
-                    {/* Official Letter of Recommendation Trigger */}
+                    {/* Official Letter of Recommendation / Appointment / Summit Certificate Trigger */}
                     {item.documentUrl && (
                       <button
                         onClick={() =>
                           setActiveDoc({
                             url: item.documentUrl!,
-                            title: item.documentLabel || `Official Letter of Recommendation (${item.organization})`,
+                            title: item.documentLabel || `Official Document (${item.organization})`,
                           })
                         }
                         className="inline-flex items-center gap-1.5 text-[11px] font-bold text-wine dark:text-gold hover:underline"
                       >
                         <FileCheck className="w-3.5 h-3.5 text-gold" />
-                        <span>View Verified LOR Document &rarr;</span>
+                        <span>
+                          {item.id === "lead-nilgiri"
+                            ? "View Verified Appointment Letter \u2192"
+                            : item.id === "lead-kedarkantha"
+                            ? "View Verified Summit Certificate \u2192"
+                            : "View Verified LOR Document \u2192"}
+                        </span>
                       </button>
                     )}
 

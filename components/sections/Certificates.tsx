@@ -35,12 +35,12 @@ export function Certificates() {
           </div>
           <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gold/15 text-wine dark:text-gold border border-gold/40 text-xs font-bold tracking-wider uppercase shrink-0 shadow-sm">
             <CheckCircle2 className="w-3.5 h-3.5 text-gold" />
-            <span>4 Verified Honors</span>
+            <span>{portfolio.certificates.length} Verified Honors</span>
           </div>
         </div>
       </Reveal>
 
-      {/* Symmetrical 2x2 Gallery Grid: All 4 cards have mathematically IDENTICAL height */}
+      {/* Symmetrical 2-Column Gallery Grid: All cards have mathematically IDENTICAL height */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12 items-stretch">
         {portfolio.certificates.map((cert, index) => (
           <Reveal key={cert.id} delay={index * 0.08} className="h-full">

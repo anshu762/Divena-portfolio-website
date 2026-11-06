@@ -41,8 +41,13 @@ export function Projects() {
     if (project.id === "gramin-growth-lab" || project.id === "reacycle") return "lg:col-span-6 md:col-span-1";
     // 3. Theoria, SkillKeep, Wealth Management: Trio Row (4 cols each)
     if (project.id === "theoria-research" || project.id === "skillkeep" || project.id === "wealth-management-plan") return "lg:col-span-4 md:col-span-1";
-    // 4. John Locke & Crimson Essays: Twin Essay Pair (6 cols each)
-    if (project.id === "cashless-society-essay" || project.id === "crimson-narrative-essay") return "lg:col-span-6 md:col-span-1";
+    // 4. Collaborative Science, John Locke Essay, & Harvard Crimson Essay: Academic Inquiries Trio (4 cols each)
+    if (
+      project.id === "collaborative-science-project" ||
+      project.id === "cashless-society-essay" ||
+      project.id === "crimson-narrative-essay"
+    )
+      return "lg:col-span-4 md:col-span-1";
 
     return "lg:col-span-4 md:col-span-1";
   };

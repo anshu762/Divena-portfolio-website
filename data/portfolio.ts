@@ -44,6 +44,8 @@ export interface ExperienceItem {
   period: string;
   description: string;
   takeaways: string[];
+  documentUrl?: string;
+  documentLabel?: string;
 }
 
 export interface LeadershipItem {
@@ -188,8 +190,9 @@ export const portfolio: PortfolioData = {
       "Competitive athletics is the highest-fidelity incubator for executive discipline. As captain, I guide on-court tactical adjustments, manage team morale during high-pressure tie-breaks, and foster a culture of resilient accountability that translates directly to boardroom leadership.",
     accolades: [
       { event: "ISSO U-19 Championship", rank: "1st Place · Champions", year: "2026" },
-      { event: "ISSO National Games U-19", rank: "2nd Place · Silver Medalist", year: "2025" },
-      { event: "Don Bosco Inter-School U-14 Tournament", rank: "1st Place · Gold Medalist", year: "Foundational" },
+      { event: "ISSO National Games U-17", rank: "2nd Place · Silver Medalist", year: "2025" },
+      { event: "CHIREC Altius Sports Fest", rank: "1st Place · Gold Medalist", year: "2025" },
+      { event: "Don Bosco Inter-School U-14 Tournament", rank: "1st Place · Champions", year: "2023" },
     ],
     images: [
       {
@@ -199,7 +202,12 @@ export const portfolio: PortfolioData = {
       },
       {
         url: "/images/volleyball_2nd.png",
-        label: "2nd Place ISSO National Games Silver",
+        label: "2nd Place ISSO National Games U-17 Silver",
+        year: "2025",
+      },
+      {
+        url: "/images/volleyball_altius_1st.png",
+        label: "1st Place CHIREC Altius Sports Fest Merit Certificate",
         year: "2025",
       },
     ],
@@ -296,20 +304,41 @@ export const portfolio: PortfolioData = {
     },
     {
       id: "wealth-management-plan",
-      title: "Wealth Management Platform",
+      title: "Wealth Management Platform Feasibility",
       role: "Financial Strategy Intern",
-      category: "Business Plan",
-      tagline: "Next-generation student financial literacy and micro-investing model.",
+      category: "Business Model",
+      tagline: "Student financial literacy and edtech feasibility study developed with AND Consulting.",
       description:
-        "Developed during engagement with AND Business Consulting to introduce adolescent demographics to equity compounding and risk budgeting.",
+        "Structured a complete commercial feasibility study and go-to-market plan for an adolescent wealth management education platform during engagement with AND Business Consulting.",
       extendedDescription:
-        "Engineered a strategic business case outlining customer acquisition channels, gamified UX flowcharts, and regulatory compliance considerations for an adolescent wealth management vehicle. Focused heavily on behavioral defaults and habit formation.",
+        "Conducted under the formal mentorship of Vrish Consulting LLP (doing business as AND Business Consulting). Formulated core student financial competency modules, pricing elasticity simulations, competitor landscape analysis, and school partnership delivery models.",
       impactMetrics: [
-        "Detailed financial projections and TAM validation",
-        "Designed behavioral incentives to curb impulsive teen spending",
+        "Verified Project Completion Certificate from Vrish Consulting LLP / AND Business Consulting",
+        "Competitor analysis across domestic and international youth edtech platforms",
+        "Target unit-economics model calibrated for Indian K-12 private institutions",
       ],
       tags: ["FinTech Strategy", "AND Consulting", "Financial Literacy", "Behavioral Design"],
       featured: false,
+      image: "/images/lor_and_consulting.png",
+    },
+    {
+      id: "collaborative-science-project",
+      title: "Collaborative Science Project: Tropospheric Ozone",
+      role: "Lead Student Investigator",
+      category: "Research",
+      tagline: "Empirical study correlating urban vehicular traffic density with tropospheric ozone.",
+      description:
+        "Investigated localized ozone pollution across diverse transit hubs in Hyderabad using the Schönbein chemical indicator method.",
+      extendedDescription:
+        "Awarded a Certificate of Appreciation by CHIREC International School for outstanding exploration and integration of a significant global scientific issue (2025–26). Assessed how vehicular density and diurnal solar radiation accelerate tropospheric ozone formation, calculating Schönbein Numbers across multiple micro-climates to evaluate environmental and public health hazards.",
+      impactMetrics: [
+        "Certificate of Appreciation awarded by CHIREC International School",
+        "Schönbein Number chemical test strip methodology deployed across Hyderabad",
+        "Synthesized empirical correlations into actionable urban environmental insights",
+      ],
+      tags: ["Environmental Science", "Schönbein Method", "Tropospheric Ozone", "Data Analysis"],
+      featured: false,
+      image: "/images/cert_collaborative_science.png",
     },
     {
       id: "cashless-society-essay",
@@ -327,6 +356,7 @@ export const portfolio: PortfolioData = {
       ],
       tags: ["Macroeconomics", "John Locke Prize", "Monetary Policy", "Philosophy"],
       featured: false,
+      image: "/images/img4.png",
     },
     {
       id: "crimson-narrative-essay",
@@ -337,16 +367,30 @@ export const portfolio: PortfolioData = {
       description:
         "An introspective literary essay interrogating cross-cultural identity, psychological resilience, and ambition in youth.",
       extendedDescription:
-        "Selected as a formal submission for the Harvard Crimson Global Essay Competition. The piece examines personal inflection points, articulating how vulnerability and athletic discipline intersect to form an enduring entrepreneurial ethos.",
+        "Awarded an official Certificate of Participation in The Harvard Crimson Global Essay Competition 2026. The piece examines personal inflection points, articulating how vulnerability and athletic discipline intersect to form an enduring entrepreneurial ethos.",
       impactMetrics: [
-        "Recognized by prestigious Harvard Crimson student-led international jury",
+        "Official Certificate of Participation awarded by The Harvard Crimson jury",
+        "Recognized by prestigious Harvard Crimson student-led international panel",
         "Mastery of narrative rhythm, rhetoric, and human-centric reflection",
       ],
       tags: ["Creative Non-Fiction", "Harvard Crimson", "Narrative Prose", "Ethics"],
       featured: false,
+      image: "/images/cert_harvard_crimson.png",
     },
   ],
   certificates: [
+    {
+      id: "cert-babson",
+      title: "Foundations of Entrepreneurial Leadership",
+      issuer: "Babson College",
+      program: "Executive Entrepreneurial Leadership Specialization",
+      date: "May 2026",
+      scoreOrAward: "Scored ≥ 80% · Verified Credential & Digital Badge",
+      image: "/images/cert_babson_leadership.png",
+      summary:
+        "Rigorous executive coursework exploring adaptive decision-making, relational innovation, PEA/NEA frameworks, and emotional and social competence under Babson's world-renowned entrepreneurship pedagogy.",
+      verificationNote: "Official Verified Badge & Completion Record from Babson College Executive Education",
+    },
     {
       id: "cert-northwestern",
       title: "High Performance Collaboration: Leadership, Teamwork & Negotiation",
@@ -395,6 +439,42 @@ export const portfolio: PortfolioData = {
         "Recognized for outstanding clarity of argument, historical reasoning, and economic depth among 100,227 entrants from 183 countries evaluated by Oxford University scholars.",
       verificationNote: "Commendation Award Certificate signed by Institute Faculty",
     },
+    {
+      id: "cert-harvard",
+      title: "Harvard Crimson Global Essay Competition",
+      issuer: "The Harvard Crimson & Crimson Education",
+      program: "Global Non-Fiction & Rhetorical Analysis",
+      date: "2026",
+      scoreOrAward: "Official Certificate of Participation",
+      image: "/images/cert_harvard_crimson.png",
+      summary:
+        "Recognized for notable international submission demonstrating intellectual engagement, persuasive analytical prose, and scholarly initiative under Harvard student-led editorial review.",
+      verificationNote: "Signed by Cassidy Goldblatt (Director, Harvard Crimson) and Crimson Leadership",
+    },
+    {
+      id: "cert-science",
+      title: "Collaborative Science Project: Tropospheric Ozone",
+      issuer: "CHIREC International School (IB World School)",
+      program: "Global Scientific Inquiry (Stage 11, 2025–26)",
+      date: "December 2025",
+      scoreOrAward: "Certificate of Appreciation · Outstanding Exploration",
+      image: "/images/cert_collaborative_science.png",
+      summary:
+        "Honored for outstanding exploration and empirical integration of urban vehicular traffic density with ground-level tropospheric ozone levels using Schönbein test protocols.",
+      verificationNote: "Official Certificate of Appreciation signed by School Principal Sanchita Raha",
+    },
+    {
+      id: "cert-kedarkantha",
+      title: "Kedarkantha Alpine Expedition (12,500 ft)",
+      issuer: "INME Learning",
+      program: "High-Altitude Himalayan Mountaineering & Leadership",
+      date: "May 2025",
+      scoreOrAward: "Certificate of Achievement · Peak Ascent",
+      image: "/images/cert_kedarkantha_trek.png",
+      summary:
+        "Demonstrated exemplary determination, mental resilience, and team leadership through a grueling 5-day high-altitude ascent to 12,500+ feet, including a 2:00 AM alpine summit push and river expedition.",
+      verificationNote: "Signed by Tarun Chandna (CEO, Inme Learning) & Ronny Gulati (Director)",
+    },
   ],
   achievements: [
     {
@@ -420,14 +500,25 @@ export const portfolio: PortfolioData = {
     },
     {
       id: "ach-volleyball-2",
-      title: "2nd Place Silver · ISSO National Games U-19",
+      title: "2nd Place Silver · ISSO National Games U-17",
       organization: "ISSO National Board",
       year: "2025",
       metric: "National Silver",
       description:
-        "Led team through grueling multi-day national tournament brackets, orchestrating tactical rotations and high-intensity defense.",
+        "Led U-17 squad through grueling multi-day national tournament brackets, orchestrating tactical rotations and high-intensity defense.",
       category: "Athletics",
       image: "/images/volleyball_2nd.png",
+    },
+    {
+      id: "ach-volleyball-altius",
+      title: "1st Place Champions · CHIREC Altius Sports Fest 2025",
+      organization: "CHIREC International Inter-School Sports Fest",
+      year: "2025",
+      metric: "1st Position",
+      description:
+        "Secured first position representing Grade 11 in the high-stakes inter-school volleyball tournament championship.",
+      category: "Athletics",
+      image: "/images/volleyball_altius_1st.png",
     },
     {
       id: "ach-charity-fundraiser",
@@ -481,14 +572,16 @@ export const portfolio: PortfolioData = {
       role: "Business Consulting Intern",
       organization: "AND Business Consulting",
       industry: "Management Consulting",
-      period: "Internship",
+      period: "Internship (April 2025)",
       description:
-        "Collaborated on strategic client case studies, operational re-engineering plans, and co-developed the foundational business model for a youth wealth management initiative.",
+        "Completed a consulting project titled 'Feasibility for creating a Wealth Management Education Platform for Students' with Vrish Consulting LLP (doing business as AND Business Consulting) in April 2025.",
       takeaways: [
-        "Built financial sensitivity models for client pitch presentations",
-        "Formulated go-to-market strategies for emerging consumer products",
-        "Refined qualitative interview synthesis into executive slides",
+        "Built financial sensitivity models, competitor analysis, and go-to-market plans",
+        "Explored pricing models and promotional strategies for youth edtech adoption",
+        "Mastered structured consulting problem-solving workflows and client presentations",
       ],
+      documentUrl: "/images/lor_and_consulting.png",
+      documentLabel: "Project Completion Certificate (AND Business Consulting)",
     },
     {
       id: "exp-cache",
@@ -524,12 +617,14 @@ export const portfolio: PortfolioData = {
       organization: "Chirec International School",
       badge: "Student Government",
       description:
-        "Elected to steer Nilgiri House representing hundreds of students across inter-house sporting tournaments, academic derbies, and cultural showcases.",
+        "Appointed Nilgiri House Captain of CHIREC International School for academic year 2026-27 by Principal Sanchita Raha. Acts as official spokesperson, prepares house agendas, represents the House on the Student Council, and mentors student cohorts across athletic and cultural showcases.",
       iconName: "Compass",
       highlights: [
-        "Mentored junior student cohorts in public debate and athletic trials",
-        "Orchestrated inter-house athletic strategies leading to podium results",
+        "Official spokesperson bridging student body and institutional administration",
+        "Mentored junior student cohorts and spearheaded inter-house athletic strategies",
       ],
+      documentUrl: "/images/appointment_nilgiri_captain.png",
+      documentLabel: "Official Appointment Letter (Nilgiri House Captain, CHIREC)",
     },
     {
       id: "lead-aerio",
@@ -614,12 +709,19 @@ export const portfolio: PortfolioData = {
       organization: "Kedarkantha Expedition (12,500 ft)",
       badge: "Endurance & Grit",
       description:
-        "Conquered the snowbound summit of Kedarkantha in the Garhwal Himalayas, navigating sub-zero conditions and arduous vertical ascent.",
+        "Conquered the 12,500+ ft peak of Kedarkantha in the Himalayas with INME on a transformative 5-day solo expedition. Trekked 7-8 hours daily over steep snowbound terrain, pushing through an arduous 2:00 AM alpine summit ascent followed by whitewater river rafting.",
       iconName: "Mountain",
-      highlights: ["Test of mental fortitude, alpine endurance, and perseverance"],
+      highlights: [
+        "Stepped out of comfort zone to forge new bonds and conquer demanding 12,500 ft ascent",
+        "Celebrated summit peak achievement with multi-team Himalayan whitewater river rafting",
+      ],
+      image: "/images/kedarkantha_trek_photos.png",
+      documentUrl: "/images/cert_kedarkantha_trek.png",
+      documentLabel: "Certificate of Achievement (Kedarkantha Expedition 12,500 ft)",
     },
   ],
   marqueeKeywords: [
+    "Babson Leadership",
     "Entrepreneurship",
     "Behavioural Economics",
     "Choice Architecture",
@@ -629,6 +731,7 @@ export const portfolio: PortfolioData = {
     "Social Innovation",
     "Unit Economics",
     "Empirical Research",
+    "Himalayan Summit",
     "Team Leadership",
     "Financial Modeling",
   ],

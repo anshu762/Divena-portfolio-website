@@ -92,7 +92,7 @@ export function Achievements() {
                   <p className="text-[11px] uppercase tracking-wider font-bold text-ink-muted mb-2.5 font-sans">
                     Tournament Verification &amp; Podiums:
                   </p>
-                  <div className="grid grid-cols-2 gap-3 max-w-md">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 max-w-lg">
                     {portfolio.volleyballSpotlight.images.map((img) => (
                       <div
                         key={img.url}
