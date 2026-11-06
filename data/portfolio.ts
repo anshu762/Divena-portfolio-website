@@ -211,6 +211,11 @@ export const portfolio: PortfolioData = {
         label: "1st Place CHIREC Altius Sports Fest Merit Certificate",
         year: "2025",
       },
+      {
+        url: "/images/volleyball_don_bosco_national.jpg",
+        label: "Don Bosco Trophy Champions & National Tournament Proof",
+        year: "2023",
+      },
     ],
   },
   projects: [
@@ -476,6 +481,30 @@ export const portfolio: PortfolioData = {
         "Demonstrated exemplary determination, mental resilience, and team leadership through a grueling 5-day high-altitude ascent to 12,500+ feet, including a 2:00 AM alpine summit push and river expedition.",
       verificationNote: "Signed by Tarun Chandna (CEO, Inme Learning) & Ronny Gulati (Director)",
     },
+    {
+      id: "cert-volleyball-altius",
+      title: "CHIREC Altius Sports Fest 2025 Merit Certificate",
+      issuer: "CHIREC International School",
+      program: "Inter-School Volleyball Tournament (Grade 11)",
+      date: "2025",
+      scoreOrAward: "1st Position · Gold Medalist",
+      image: "/images/volleyball_altius_1st.png",
+      summary:
+        "Awarded official Merit Certificate for securing 1st Position representing Grade 11 in the high-stakes Inter-School Volleyball Championship at CHIREC Altius Sports Fest 2025.",
+      verificationNote: "Official Merit Certificate signed by Principal, CHIREC International School",
+    },
+    {
+      id: "cert-volleyball-donbosco",
+      title: "Don Bosco Trophy & National Volleyball Championship",
+      issuer: "Don Bosco School & Telangana Volleyball Association",
+      program: "Inter-School & 9th National Level Tournament",
+      date: "2023",
+      scoreOrAward: "1st Place Champions (U-14) & National Tournament",
+      image: "/images/volleyball_don_bosco_national.jpg",
+      summary:
+        "Won the Don Bosco Trophy (Under-14 Volleyball Championship) and represented CHIREC International School at the 9th National Level Invitation Inter-School Volleyball Tournament.",
+      verificationNote: "Official Certificate of Achievement & Participation signed by Principal & Association Officials",
+    },
   ],
   achievements: [
     {
@@ -520,6 +549,17 @@ export const portfolio: PortfolioData = {
         "Secured first position representing Grade 11 in the high-stakes inter-school volleyball tournament championship.",
       category: "Athletics",
       image: "/images/volleyball_altius_1st.png",
+    },
+    {
+      id: "ach-volleyball-donbosco",
+      title: "1st Place Champions · Don Bosco Trophy & 9th National Tournament",
+      organization: "Don Bosco School & Telangana Volleyball Association",
+      year: "2023",
+      metric: "Champions (U-14)",
+      description:
+        "Won the Don Bosco Trophy (Under-14 Volleyball Championship) and represented CHIREC International School at the 9th National Level Invitation Inter-School Volleyball Tournament.",
+      category: "Athletics",
+      image: "/images/volleyball_don_bosco_national.jpg",
     },
     {
       id: "ach-charity-fundraiser",

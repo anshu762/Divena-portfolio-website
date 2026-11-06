@@ -64,7 +64,7 @@ export function Certificates() {
                 {/* Folio Index Badge */}
                 <div className="absolute top-4 right-4 z-20">
                   <span className="px-2.5 py-1 rounded-md bg-black/60 backdrop-blur-md text-white text-[10px] font-mono tracking-widest uppercase border border-white/15">
-                    FOLIO № 0{index + 1}
+                    FOLIO № {index < 9 ? `0${index + 1}` : index + 1}
                   </span>
                 </div>
 
